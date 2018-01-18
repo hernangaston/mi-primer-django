@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mi Principal</title>
+</head>
+<body>
+	<header id="header" class="">
+		<h1>Mi Biblioteca</h1>
+	</header><!-- /header -->
+	<nav>
+		<ul>
+			<li><a href="#" title="">Ir a...</a></li>
+		</ul>
+	</nav>	
+	<div>
+		<h1>Editores</h1>
+		{% for e in editor %}
+		<div>
+			<p>Nombre: {{e.nombre}}</p>
+			<p>Website: {{e.website}}</p>	
+		</div>
+		{% endfor %}
+		<h1>Libros</h1>
+		{% for libro in libros %}
+			<div>
+				<p>Titulo: {{ libro.titulo }}</p>
+				<p>Editor: {{ libro.editor }}</p>
+				<p>Fecha de publicacion: {{ libro.fecha_publicacion }}</p>
+				<p>Portada: <img src="{{ libro.portada }}" alt="portadas" /></p>
+			</div>
+		{% endfor %}
+		<h1>Autor/es</h1>
+		{% for a in autor %}
+			<div>
+				<p>Nombre: {{ a.nombre }}</p>
+				<p>Apellidos: {{ a.apellidos }}</p>
+				<p>E-mail: {{ a.email }}</p>
+			</div>
+		{% endfor %}	
+{% block content %}
+			
+{% endblock %}	
+</body>
+</html>
