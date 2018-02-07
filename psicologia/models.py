@@ -12,8 +12,8 @@ class SesionTerapeutica(models.Model):
 		ordering = ["fecha_sesion"] #establecer orden por defecto
 		verbose_name_plural = "Sesiones Terapeuticas" #titulo que muestra la interfaz administrativa  porque agrega ls 's' por defecto 
 
-	def __str__(self):
-		return self.paciente.nombre
+	def __int__(self):
+		return self.numero_sesion
 
 
 class Paciente(models.Model):
@@ -31,7 +31,7 @@ class Paciente(models.Model):
 		verbose_name_plural = "Pacientes"
 	
 	def __str__(self):
-		return self.apellido
+		return self.apellido + " " + self.nombre 
 
 class ObraSocial(models.Model):
 	nombre = models.CharField(max_length=70)

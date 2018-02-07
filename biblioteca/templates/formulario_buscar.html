@@ -1,0 +1,18 @@
+{%  extends 'principal.html' %}
+
+{% block content %}
+	<h1>Fromulario de busqueda </h1>
+	<div>
+		{% if error %}
+			<ul>
+				{% for e in error %}
+					<li style="color: red;">{{ e }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<form action="/buscar/" method="get" accept-charset="utf-8">
+			<input type="text" name="q">
+			<input type="submit" value="Buscar">
+		</form>
+	</div>
+{% endblock %}

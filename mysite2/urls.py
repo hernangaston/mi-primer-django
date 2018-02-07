@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from biblioteca import views
-
+from psicologia.views import main
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
+    path('formulario_buscar/', views.formulario_buscar, name='formulario_buscar'),
+    path('buscar/', views.buscar, name='buscar'),
+    path('main/', main, name='main'),
 ]

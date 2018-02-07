@@ -1,0 +1,25 @@
+{%  extends 'principal.html' %}
+{% block content %}
+	<h1>Contactanos</h1>
+	{% if form.errors %}
+		<p style="color: red;">Por favor corrige lo siguiente</p>
+	{% endif %}
+	<form action="" method="post">{% csrf_token %}
+		<div>
+			{{ form.asunto.errors }}
+				<label for="id_asunto">Asunto: </label>
+			{{ form.asunto }}
+		</div>
+		<div>
+			{{ form.email.errors }}
+				<label for="id_email">Email: </label>
+			{{ form.email }}
+		</div>
+		<div>
+			<p style="color: red;">{{ form.mensaje.errors }}</p>
+				<label for="id_mensaje">Mensaje: </label>
+			{{ form.mensaje }}
+		</div>
+		<input type="submit" value="Enviar">
+	</form>
+{% endblock %}
