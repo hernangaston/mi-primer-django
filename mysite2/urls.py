@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from biblioteca import views
-from psicologia.views import main
+from psicologia.views import main, sesiones, facturadas, pendientes
 
 
 urlpatterns = [
@@ -25,4 +25,7 @@ urlpatterns = [
     path('formulario_buscar/', views.formulario_buscar, name='formulario_buscar'),
     path('buscar/', views.buscar, name='buscar'),
     path('main/', main, name='main'),
+    path('sesiones/', sesiones, name='sesiones'),
+    path('facturadas/', facturadas, name='facturadas'),
+    path('pendientes/', pendientes, name='pendientes'),
 ]

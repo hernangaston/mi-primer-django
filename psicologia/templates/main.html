@@ -6,24 +6,18 @@
 <body>
 {% block content %}	
 	<header id="header" class="">
-		<h1>Administracion de Sesiones</h1>
+		<h1>Sistema de administracion y consulta</h1>
 	</header><!-- /header -->
 	<nav>
 		<ul>
-			<li><a href="formulario_buscar/" title="">Login</a></li>
-			<li><a href="#" title="">Otra cosa</a></li>
+			<li><a href="#" title="">Login</a></li>
+			<li><a href="http://localhost/sesiones/" title="">Sesiones</a></li>
+			<li><a href="http://localhost/facturadas/" title="">Sesiones Facturadas</a></li>			
+			<li><a href="http://localhost/pendientes/" title="">Sesiones pendientes de facturar</a></li>
 		</ul>
 	</nav>	
 	<div>
-		<h1>Sesiones</h1>
-		{% for s in sesion %}
-			<div>
-				<h2>{{s.paciente}}</h2>				
-				<p>{{s.discurso}}</p>
-				<p>{{s.fecha_sesion}}</p>
-				<p>{{s.facturada}}</p>
-				<p>{{s.numero_sesion}}</p>					
-			</div>
-		{% endfor %}			
+		
+	</div>				
 {% endblock %}	
 </body>

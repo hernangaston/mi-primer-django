@@ -8,10 +8,32 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from psicologia.models import *
 
-def main(request):
+def main(request):	
+	return render(request, "main.html")
+
+def sesiones(request):
 	
 	sesion = SesionTerapeutica.objects.all()
+	paciente = Paciente.objects.all()
+	autorizacion = Autorizacion.objects.all()
+
+	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
+	
+	return render(request, "sesiones.html", d)
+
+
+def facturadas(request):
+
+	sesion = SesionTerapeutica.objects.filter(facturada = True)
 
 	d = dict(sesion=sesion)
-	
-	return render(request, "main.html", d)
+
+	return render(request, "sesiones.html", d)
+
+def pendientes(request):
+
+	sesion = SesionTerapeutica.objects.filter(facturada = False)
+
+	d = dict(sesion=sesion)
+
+	return render(request, "sesiones.html", d)
