@@ -16,6 +16,8 @@ def sesiones(request):
 	sesion = SesionTerapeutica.objects.all()
 	paciente = Paciente.objects.all()
 	autorizacion = Autorizacion.objects.all()
+	sesiones_facturadas = SesionTerapeutica.objects.filter(facturada = True)
+	sesiones_pendientes = SesionTerapeutica.objects.filter(facturada = False)
 
 	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
 	
@@ -37,3 +39,23 @@ def pendientes(request):
 	d = dict(sesion=sesion)
 
 	return render(request, "sesiones.html", d)
+
+def autorizaciones(request):
+	
+	sesion = SesionTerapeutica.objects.all()
+	paciente = Paciente.objects.all()
+	autorizacion = Autorizacion.objects.all()
+
+	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
+	
+	return render(request, "autorizaciones.html", d)
+
+def pacientes(request):
+	
+	sesion = SesionTerapeutica.objects.all()
+	paciente = Paciente.objects.all()
+	autorizacion = Autorizacion.objects.all()
+
+	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
+	
+	return render(request, "pacientes.html", d)

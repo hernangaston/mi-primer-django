@@ -1,34 +1,17 @@
-{%  extends 'principal.html' %}
+{%  extends 'main.html' %}
 {% block content %}
 	<h1>Sesiones</h1>
 		{% for s in sesion %}
 			<div>
-				{% if s.facturada %}
-					<h2>Listado de sesiones facturadas</h2>
-				{% else %}
-					<h2>Listado de sesiones pendientes de facturar</h2>
-				{% endif %}
+				<h2>Listado total de sesiones</h2>
 				<h3>Peciente: {{s.paciente}}</h3>			
 				<p>Numero de sesion: {{s.numero_sesion}}</p>	
 				<p>Charla: {{s.discurso}}</p>
-				<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>					
-			</div>
-		{% endfor %}
-	<h1>Paciente</h1>
-		{% for s in paciente %}
-			<div>
-				<h2>{{s.nombre}}{{s.apellido}}</h2>				
-				<p>{{s.obra_social}}</p>					
-			</div>
-		{% endfor %}
-	<h1>Autorizaciones</h1>
-		{% for s in autorizacion %}
-			<div>
-				<h2>{{s.paciente}}</h2>				
-				<p>{{s.obra_social}}</p>
-				<p>{{s.fecha_autorizacion}}</p>
-				{% if s.presentada %}
-					<p>Presentada: SI</p>
+				<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>
+				{% if s.facturada %}
+					<p>Facturada: Si</p>
+				{% else %}
+					<p>Facturada: No</p>
 				{% endif %}					
 			</div>
 		{% endfor %}

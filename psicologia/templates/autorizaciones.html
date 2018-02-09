@@ -1,0 +1,15 @@
+{%  extends 'main.html' %}
+{% block content %}
+	<h1>Autorizaciones</h1>
+		{% for s in autorizacion %}
+			<div>
+				<h2>{{s.paciente}}</h2>				
+				<p>{{s.obra_social}}</p>
+				<p>{{s.fecha_autorizacion}}</p>
+				{% if s.presentada %}
+					<p>Presentada: SI</p>
+				{% endif %}					
+			</div>
+		{% endfor %}
+		<a href="http://localhost/main/" title="">Volver</a>
+{% endblock %}

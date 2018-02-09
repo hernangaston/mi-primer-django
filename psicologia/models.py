@@ -31,7 +31,7 @@ class Paciente(models.Model):
 		verbose_name_plural = "Pacientes"
 	
 	def __str__(self):
-		return self.apellido + " " + self.nombre 
+		return "%s %s" % (self.apellido, self.nombre) 
 
 class ObraSocial(models.Model):
 	nombre = models.CharField(max_length=70)

@@ -1,0 +1,11 @@
+{%  extends 'main.html' %}
+{% block content %}
+	<h1>Paciente</h1>
+		{% for s in paciente %}
+			<div>
+				<h2>{{s.nombre}}{{s.apellido}}</h2>				
+				<p>{{s.obra_social}}</p>					
+			</div>
+		{% endfor %}
+		<a href="http://localhost/main/" title="">Volver</a>
+{% endblock %}
