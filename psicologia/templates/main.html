@@ -4,13 +4,15 @@
 	<title>Psicologia</title>
 </head>
 <body>
-{% block content %}	
+{% block content %}
+{% if user.is_authenticated %}
+	<h1>Hola {{ user.username  }}!</h1>
 	<header id="header" class="">
 		<h1>Sistema de administracion y consulta</h1>
 	</header><!-- /header -->
 	<nav>
 		<ul>
-			<li><a href="#" title="">Login</a></li>
+			<li><a href="http://localhost/login/" title="">Login</a></li>
 			<li><a href="http://localhost/sesiones/" title="">Sesiones</a></li>
 			<li><a href="http://localhost/facturadas/" title="">Sesiones Facturadas</a></li>			
 			<li><a href="http://localhost/pendientes/" title="">Sesiones pendientes de facturar</a></li>
@@ -20,6 +22,9 @@
 	</nav>	
 	<div>
 		
-	</div>				
+	</div>
+{% else %}
+	<a href="{% url 'registro' %}" title="">Registrate</a>
+{% endif %}					
 {% endblock %}	
 </body>

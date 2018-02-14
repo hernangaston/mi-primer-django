@@ -1,19 +1,19 @@
 {%  extends 'main.html' %}
 {% block content %}
 	<h1>Sesiones</h1>
-		{% for s in sesion %}
-			<div>
-				<h2>Listado total de sesiones</h2>
-				<h3>Peciente: {{s.paciente}}</h3>			
-				<p>Numero de sesion: {{s.numero_sesion}}</p>	
-				<p>Charla: {{s.discurso}}</p>
-				<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>
-				{% if s.facturada %}
-					<p>Facturada: Si</p>
-				{% else %}
-					<p>Facturada: No</p>
-				{% endif %}					
-			</div>
-		{% endfor %}
-		<a href="http://localhost/main/" title="">Volver</a>
+	{% for s in sesion %}
+		<div>
+			<h2>Listado total de sesiones</h2>
+			<h3>Peciente: {{s.paciente}}</h3>			
+			<p>Numero de sesion: {{s.numero_sesion}}</p>	
+			<p>Charla: {{s.discurso}}</p>
+			<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>
+			{% if s.facturada %}
+				<p>Facturada: Si</p>
+			{% else %}
+				<p>Facturada: No</p>
+			{% endif %}					
+		</div>
+	{% endfor %}
+	<a href="http://localhost/main/" title="">Volver</a>
 {% endblock %}

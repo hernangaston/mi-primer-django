@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 
 from psicologia.models import *
+from psicologia.forms import *
 
 def main(request):	
 	return render(request, "main.html")
@@ -59,3 +60,15 @@ def pacientes(request):
 	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
 	
 	return render(request, "pacientes.html", d)
+
+def login(request):
+	email = request.POST.get('username','')
+	password = request.POST.get('password','')
+	form = FormularioLogin(request.POST.get('email'), request.POST.get('password',''))
+	d = dict(form=form)
+	return render(request, 'formulario_login.html', d)
+
+def registro(request):
+	form = FormularioRegsitro()
+	d = dict(form = form)
+	return render(request, 'formulario_registro.html', d)

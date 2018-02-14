@@ -73,3 +73,4 @@ class Autorizacion(models.Model):
 
 	def __str__(self):
 		return self.paciente.nombre
+
