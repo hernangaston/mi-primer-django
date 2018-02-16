@@ -10,7 +10,7 @@ from psicologia.models import *
 from psicologia.forms import *
 
 def main(request):	
-	return render(request, "main.html")
+	return render(request, "index_psicologia.html")
 
 def sesiones(request):
 	
@@ -61,12 +61,12 @@ def pacientes(request):
 	
 	return render(request, "pacientes.html", d)
 
-def login(request):
+"""def login(request):
 	email = request.POST.get('username','')
 	password = request.POST.get('password','')
 	form = FormularioLogin(request.POST.get('email'), request.POST.get('password',''))
 	d = dict(form=form)
-	return render(request, 'formulario_login.html', d)
+	return render(request, 'formulario_login.html', d)"""
 
 def registro(request):
 	form = FormularioRegsitro()

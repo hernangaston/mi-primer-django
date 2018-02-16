@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Psicologia</title>
+</head>
+<body>
+{% block content %}
+{% if user.is_authenticated %}
+	<h1>Hola {{ user.username  }}!</h1>
+	<header id="header" class="">
+		<h1>Sistema de administracion y consulta</h1>
+	</header><!-- /header -->
+	<nav>
+		<ul>
+			<li><a href="http://localhost/logout/" title="">Logout</a></li>
+			<li><a href="sesiones/" title="">Sesiones</a></li>
+			<li><a href="facturadas/" title="">Sesiones Facturadas</a></li>			
+			<li><a href="pendientes/" title="">Sesiones pendientes de facturar</a></li>
+			<li><a href="pacientes/" title="">Pacientes</a></li>
+			<li><a href="autorizaciones/" title="">Autorizaciones</a></li>
+		</ul>
+	</nav>	
+	<div>
+		
+	</div>
+{% else %}
+	<a href="login/" title="">Login</a>
+	<a href="#" title="">Registrate</a>
+{% endif %}					
+{% endblock %}	
+</body>

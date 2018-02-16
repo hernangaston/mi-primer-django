@@ -1,9 +1,9 @@
-{%  extends 'main.html' %}
+{%  extends 'index_psicologia.html' %}
 {% block content %}
 	<h1>Login</h1>
-	<form action="" method="POST">
+	<form action="" method="POST">{% csrf_token %}
 		{{ form.as_p }}
-		<input type="submit" value="Enviar">
+		<input type="submit" value="Ingresar">
 	</form>
-	<p><a href="http://localhost/registro/" title="">Registro</a></p>
+	<p><a href="http://localhost/psicologia/registro/" title="">Registro</a></p>
 {% endblock %}

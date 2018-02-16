@@ -17,7 +17,7 @@ def main(request):
 
 	d = dict(editor=editor, autor=autor, libros=libro)
 	
-	return render(request, "principal.html", d)
+	return render(request, "index.html", d)
 
 
 def formulario_buscar(request):

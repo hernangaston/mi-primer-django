@@ -1,4 +1,4 @@
-{%  extends 'main.html' %}
+{%  extends 'index_psicologia.html' %}
 {% block content %}
 	<h1>Paciente</h1>
 		{% for s in paciente %}
@@ -7,5 +7,5 @@
 				<p>{{s.obra_social}}</p>					
 			</div>
 		{% endfor %}
-		<a href="http://localhost/main/" title="">Volver</a>
+		<a href="http://localhost/psicologia/" title="">Volver</a>
 {% endblock %}
