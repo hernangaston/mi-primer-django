@@ -57,8 +57,8 @@ ROOT_URLCONF = 'mysite2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],#que busque las templates en una carpeta que se llame templates en la raiz del proyecto
+        'APP_DIRS': True,#quiere decir que cuando buesque un template tambien lo busque dentro de la carpeta de c/u de ntras. aplicaciones (Video 9 CF)
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'psicologia'), )
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #MEDIA_ROOT = 'static/'
 #MEDIA_URL = 'http://localhost:8000/media/'
