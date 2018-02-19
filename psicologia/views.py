@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 #from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
 from psicologia.models import *
@@ -72,3 +72,15 @@ def registro(request):
 	form = FormularioRegsitro()
 	d = dict(form = form)
 	return render(request, 'formulario_registro.html', d)
+
+
+def vistaSesion(request):
+	if request.method == 'POST':
+		form = FormularioSesion(request.POST)
+		if form.is_valid():
+			form.save()
+		return redirect('main')
+	else:
+		form = FormularioSesion()
+	d = dict(form= form)
+	return  render(request, 'sesion_form.html', d)
