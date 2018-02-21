@@ -1,19 +1,25 @@
 {%  extends 'index_psicologia.html' %}
 {% block content %}
 	<h1>Sesiones</h1>
+	{% if sesion %}
 	{% for s in sesion %}
 		<div>
 			<h2>Listado total de sesiones</h2>
-			<h3>Peciente: {{s.paciente}}</h3>			
-			<p>Numero de sesion: {{s.numero_sesion}}</p>	
+			<h3>Peciente: {{s.paciente}}</h3>	
 			<p>Charla: {{s.discurso}}</p>
+			<p>Numero de sesion: {{ s.numero_sesion }}</p>
 			<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>
 			{% if s.facturada %}
 				<p>Facturada: Si</p>
 			{% else %}
 				<p>Facturada: No</p>
-			{% endif %}					
+			{% endif %}
+			<a class="btn btn-outline-info" href="editar/" title="">Editar</a>
+			<a class="btn btn-outline-primary" href="eliminar/" title="">Eliminar</a>					
 		</div>
 	{% endfor %}
+	{% else %}
+		<p>No hay sesiones</p>
+	{% endif %}
 	<a href="http://localhost/psicologia/" title="">Volver</a>
 {% endblock %}

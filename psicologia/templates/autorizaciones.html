@@ -1,6 +1,7 @@
 {%  extends 'index_psicologia.html' %}
 {% block content %}
 	<h1>Autorizaciones</h1>
+		{% if autorizacion %}
 		{% for s in autorizacion %}
 			<div>
 				<h2>{{s.paciente}}</h2>				
@@ -8,8 +9,13 @@
 				<p>{{s.fecha_autorizacion}}</p>
 				{% if s.presentada %}
 					<p>Presentada: SI</p>
-				{% endif %}					
+				{% endif %}
+				<a class="btn btn-outline-info" href="editar/" title="">Editar</a>
+				<a class="btn btn-outline-primary" href="eliminar/" title="">Eliminar</a>						
 			</div>
 		{% endfor %}
+		{% else %}
+		<p>No hay autorizaciones para mostrar</p>
+		{% endif %}
 		<a href="http://localhost/psicologia/" title="">Volver</a>
 {% endblock %}

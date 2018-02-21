@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from django.urls import path
 
-from psicologia.views import main, sesiones, facturadas, pendientes, pacientes, autorizaciones, registro, vistaSesion
+from psicologia.views import main, sesiones, facturadas, pendientes, pacientes, autorizaciones, registro, vistaSesion, vistaPaciente
 
 from django.contrib.auth.views import login
 
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^pacientes/$', pacientes),
     url(r'^autorizaciones/$', autorizaciones),
     url(r'^nuevasesion/$', vistaSesion, name='nueva_sesion'),
+    url(r'^nuevopaciente/$', vistaPaciente, name='nuevo_paciente'),
     path('login/', login, {'template_name': 'formulario_login.html'}, name='login'),
     path('registro/', registro, {'template_name': 'formulario_registro.html'}, name='registro'),
 ]

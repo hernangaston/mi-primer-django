@@ -84,3 +84,17 @@ def vistaSesion(request):
 		form = FormularioSesion()
 	d = dict(form= form)
 	return  render(request, 'sesion_form.html', d)
+
+
+	
+
+def vistaPaciente(request):
+	if request.method == 'POST':
+		form = FormularioPaciente(request.POST)
+		if form.is_valid():
+			form.save()
+		return redirect('main')
+	else:
+		form = FormularioPaciente()
+	d = dict(form= form)
+	return  render(request, 'paciente_form.html', d)

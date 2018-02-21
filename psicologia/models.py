@@ -6,13 +6,14 @@ class SesionTerapeutica(models.Model):
 	discurso = models.TextField()
 	fecha_sesion = models.DateField()
 	facturada = models.BooleanField()
-	numero_sesion= models.IntegerField()
+	numero_sesion = models.TextField()
+	
 
 	class Meta:
 		ordering = ["fecha_sesion"] #establecer orden por defecto
 		verbose_name_plural = "Sesiones Terapeuticas" #titulo que muestra la interfaz administrativa  porque agrega ls 's' por defecto 
 
-	def __int__(self):
+	def __str__(self):
 		return self.numero_sesion
 
 
@@ -25,6 +26,8 @@ class Paciente(models.Model):
 	dni = models.IntegerField()
 	historia = models.ForeignKey('Historia', on_delete=models.PROTECT)
 	medicacion = models.TextField()
+	diagnostico = models.TextField()
+	inicio_tratamiento = models.DateField()
 
 	class Meta:
 		ordering = ["apellido"]
@@ -43,7 +46,7 @@ class ObraSocial(models.Model):
 
 
 	def __str__(self):
-		return self.nombre
+		return '{}'.format(self.nombre)
 
 class Historia(models.Model):
 	historia_del_paciente = models.TextField()
