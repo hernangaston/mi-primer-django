@@ -14,7 +14,7 @@ class SesionTerapeutica(models.Model):
 		verbose_name_plural = "Sesiones Terapeuticas" #titulo que muestra la interfaz administrativa  porque agrega ls 's' por defecto 
 
 	def __str__(self):
-		return self.numero_sesion
+		return "%s %s" % (self.paciente.apellido, self.paciente.nombre) 
 
 
 class Paciente(models.Model):

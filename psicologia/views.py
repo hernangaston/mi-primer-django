@@ -6,13 +6,17 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+
 from psicologia.models import *
 from psicologia.forms import *
 
 def main(request):	
 	return render(request, "index_psicologia.html")
 
-def sesiones(request):
+#vista basada en funciones
+"""def sesiones(request):
 	
 	sesion = SesionTerapeutica.objects.all()
 	paciente = Paciente.objects.all()
@@ -22,7 +26,13 @@ def sesiones(request):
 
 	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
 	
-	return render(request, "sesiones.html", d)
+	return render(request, "sesiones.html", d)"""
+#misma vista que la de arriba pero basa en clases estoy usando esta
+class SesionList(ListView):
+	model = SesionTerapeutica
+	template_name = "sesiones.html"
+
+
 
 
 def facturadas(request):
@@ -73,7 +83,7 @@ def registro(request):
 	d = dict(form = form)
 	return render(request, 'formulario_registro.html', d)
 
-
+"""Vista que renderiza el formulario para crear la sesion hecha como funcion
 def vistaSesion(request):
 	if request.method == 'POST':
 		form = FormularioSesion(request.POST)
@@ -83,9 +93,15 @@ def vistaSesion(request):
 	else:
 		form = FormularioSesion()
 	d = dict(form= form)
-	return  render(request, 'sesion_form.html', d)
+	return  render(request, 'sesion_form.html', d)"""
 
 
+#Vista que renderiza el formulario para crear la sesion hecha como clase (hace lo mismo que la de arriba)
+class SesionCreate(CreateView):
+	model = SesionTerapeutica
+	form_class = FormularioSesion
+	template_name = 'sesion_form.html'
+	success_url = reverse_lazy('sesiones')
 	
 
 def vistaPaciente(request):
@@ -139,3 +155,5 @@ def paciente_delete(request, id_paciente):
 		return redirect('pacientes')
 	d = dict(paciente=paciente)
 	return render(request, 'paciente_delete.html', d)
+
+

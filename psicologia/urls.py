@@ -2,14 +2,15 @@ from django.conf.urls import url
 
 from django.urls import path
 
-from psicologia.views import main, sesiones, facturadas, pendientes, pacientes, autorizaciones, registro, vistaSesion, vistaPaciente, sesion_edit, paciente_edit, sesion_delete, paciente_delete
+from psicologia.views import main, facturadas, pendientes, pacientes, autorizaciones, registro, \
+    vistaPaciente, sesion_edit, paciente_edit, sesion_delete, paciente_delete, SesionList, SesionCreate
 
 from django.contrib.auth.views import login
 
 urlpatterns = [
     url(r'^$', main, name='main'),
-    url(r'^sesiones/$', sesiones, name='sesiones'),
-    url(r'^nuevasesion/$', vistaSesion, name='nueva_sesion'),
+    url(r'^sesiones/$', SesionList.as_view(), name='sesiones'),
+    url(r'^nuevasesion/$', SesionCreate.as_view(), name='nueva_sesion'),
     url(r'^sesiones/editarsesion/(?P<id_sesion>\d+)/$', sesion_edit, name='sesion_editar'),
     url(r'^sesiones/eliminarsesion/(?P<id_sesion>\d+)/$', sesion_delete, name='sesion_eliminar'),
     url(r'^facturadas/$', facturadas),
