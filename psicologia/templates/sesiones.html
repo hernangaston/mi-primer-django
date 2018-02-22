@@ -9,13 +9,14 @@
 			<p>Charla: {{s.discurso}}</p>
 			<p>Numero de sesion: {{ s.numero_sesion }}</p>
 			<p>Fecha de la Sesion: {{s.fecha_sesion}}</p>
+			<p>Id de la Sesion: {{s.id}}</p>
 			{% if s.facturada %}
 				<p>Facturada: Si</p>
 			{% else %}
 				<p>Facturada: No</p>
 			{% endif %}
-			<a class="btn btn-outline-info" href="editar/" title="">Editar</a>
-			<a class="btn btn-outline-primary" href="eliminar/" title="">Eliminar</a>					
+			<a class="btn btn-outline-info" href="editarsesion/{{ s.id }}" title="">Editar</a>
+			<a class="btn btn-outline-primary" href="eliminarsesion/{{ s.id }}" title="">Eliminar</a>					
 		</div>
 	{% endfor %}
 	{% else %}

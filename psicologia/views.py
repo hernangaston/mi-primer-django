@@ -98,3 +98,44 @@ def vistaPaciente(request):
 		form = FormularioPaciente()
 	d = dict(form= form)
 	return  render(request, 'paciente_form.html', d)
+
+
+def sesion_edit(request, id_sesion):
+	sesion = SesionTerapeutica.objects.get(id=id_sesion)
+	if request.method == 'GET':
+		form = FormularioSesion(instance = sesion)
+	else:
+		form = FormularioSesion(request.POST, instance=sesion)
+		if form.is_valid():
+			form.save()
+		return redirect('sesiones')
+	d = dict(form= form)
+	return render(request, 'sesion_form.html', d)
+
+def paciente_edit(request, id_paciente):
+	paciente = Paciente.objects.get(id=id_paciente)
+	if request.method == 'GET':
+		form = FormularioPaciente(instance = paciente)
+	else:
+		form = FormularioPaciente(request.POST, instance=paciente)
+		if form.is_valid():
+			form.save()
+		return redirect('pacientes')
+	d = dict(form= form)
+	return render(request, 'paciente_form.html', d)
+
+def sesion_delete(request, id_sesion):
+	sesion = SesionTerapeutica.objects.get(id=id_sesion)
+	if request.method == 'POST':
+		sesion.delete()
+		return redirect('sesiones')
+	d = dict(sesion=sesion)
+	return render(request, 'sesion_delete.html', d)
+
+def paciente_delete(request, id_paciente):
+	paciente = Paciente.objects.get(id=id_paciente)
+	if request.method == 'POST':
+		paciente.delete()
+		return redirect('pacientes')
+	d = dict(paciente=paciente)
+	return render(request, 'paciente_delete.html', d)

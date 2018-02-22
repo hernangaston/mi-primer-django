@@ -6,8 +6,8 @@
 			<div>
 				<h2>{{s.nombre}}{{s.apellido}}</h2>		
 				<p>{{s.obra_social}}</p>	
-				<a class="btn btn-outline-info" href="editar/" title="">Editar</a>
-				<a class="btn btn-outline-primary" href="eliminar/" title="">Eliminar</a>					
+				<a class="btn btn-outline-info" href="editarpaciente/{{ s.id }}" title="">Editar</a>
+				<a class="btn btn-outline-primary" href="eliminarpaciente/{{ s.id }}" title="">Eliminar</a>					
 			</div>
 		{% endfor %}
 		{% else %}
