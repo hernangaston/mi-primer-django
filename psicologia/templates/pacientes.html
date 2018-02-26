@@ -1,10 +1,10 @@
 {%  extends 'index_psicologia.html' %}
 {% block content %}
 	<h1>Paciente</h1>
-		{% if paciente %}
-		{% for s in paciente %}
+		{% if object_list %}
+		{% for s in object_list %}
 			<div>
-				<h2>{{s.nombre}}{{s.apellido}}</h2>		
+				<h2>{{s.nombre}} {{s.apellido}}</h2>		
 				<p>{{s.obra_social}}</p>	
 				<a class="btn btn-outline-info" href="editarpaciente/{{ s.id }}" title="">Editar</a>
 				<a class="btn btn-outline-primary" href="eliminarpaciente/{{ s.id }}" title="">Eliminar</a>					
@@ -13,5 +13,7 @@
 		{% else %}
 			<p>No hay pacientes para mostrar</p>
 		{% endif %}
-		<a href="http://localhost/psicologia/" title="">Volver</a>
+	<br />
+	<br />
+	<a class="btn btn-outline-danger" href="http://localhost/psicologia/" title="">Volver</a>
 {% endblock %}

@@ -6,14 +6,19 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from psicologia.models import *
 from psicologia.forms import *
 
+#-------------VISTA PRINCIPAL------------------------------
+
 def main(request):	
 	return render(request, "index_psicologia.html")
+
+
+#---------------------VISTA DE LAS SESIONES Y VARIANTES--------------------
 
 #vista basada en funciones
 """def sesiones(request):
@@ -27,15 +32,29 @@ def main(request):
 	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
 	
 	return render(request, "sesiones.html", d)"""
-#misma vista que la de arriba pero basa en clases estoy usando esta
+
+
+#---misma vista que la de arriba pero basa en clases estoy usando esta
 class SesionList(ListView):
 	model = SesionTerapeutica
 	template_name = "sesiones.html"
 
 
+class SesionesPendientes(ListView):
+	model = SesionTerapeutica
+	queryset = SesionTerapeutica.objects.filter(facturada = False)
+	template_name = "sesiones.html"
 
 
-def facturadas(request):
+class SesionesFacturadas(ListView):
+	model = SesionTerapeutica
+	queryset = SesionTerapeutica.objects.filter(facturada = True)
+	template_name = "sesiones.html"
+
+
+
+#reemplazadas por las clases de arriba fact y pendientes
+"""def facturadas(request):
 
 	sesion = SesionTerapeutica.objects.filter(facturada = True)
 
@@ -49,7 +68,11 @@ def pendientes(request):
 
 	d = dict(sesion=sesion)
 
-	return render(request, "sesiones.html", d)
+	return render(request, "sesiones.html", d)"""
+
+
+#--------------VISTA DE LAS AUTORIZACIONES-------------------
+
 
 def autorizaciones(request):
 	
@@ -61,6 +84,10 @@ def autorizaciones(request):
 	
 	return render(request, "autorizaciones.html", d)
 
+
+#------------------VISTA DE LOS PACIENTES--------------------------
+
+"""Vista de pacientes creada con una funcion
 def pacientes(request):
 	
 	sesion = SesionTerapeutica.objects.all()
@@ -69,19 +96,15 @@ def pacientes(request):
 
 	d = dict(sesion=sesion, paciente=paciente, autorizacion=autorizacion)
 	
-	return render(request, "pacientes.html", d)
+	return render(request, "pacientes.html", d)"""
 
-"""def login(request):
-	email = request.POST.get('username','')
-	password = request.POST.get('password','')
-	form = FormularioLogin(request.POST.get('email'), request.POST.get('password',''))
-	d = dict(form=form)
-	return render(request, 'formulario_login.html', d)"""
 
-def registro(request):
-	form = FormularioRegsitro()
-	d = dict(form = form)
-	return render(request, 'formulario_registro.html', d)
+#igual vista de oacientes creada con una clase
+class PacientesList(ListView):
+	model = Paciente
+	template_name = "pacientes.html"
+
+#----------------CREAR REGISTROS EN BBDD--------------------------------
 
 """Vista que renderiza el formulario para crear la sesion hecha como funcion
 def vistaSesion(request):
@@ -104,7 +127,7 @@ class SesionCreate(CreateView):
 	success_url = reverse_lazy('sesiones')
 	
 
-def vistaPaciente(request):
+"""def vistaPaciente(request):
 	if request.method == 'POST':
 		form = FormularioPaciente(request.POST)
 		if form.is_valid():
@@ -113,10 +136,20 @@ def vistaPaciente(request):
 	else:
 		form = FormularioPaciente()
 	d = dict(form= form)
-	return  render(request, 'paciente_form.html', d)
+	return  render(request, 'paciente_form.html', d)"""
 
 
-def sesion_edit(request, id_sesion):
+class PacienteCreate(CreateView):
+	model = Paciente
+	form_class = FormularioPaciente
+	template_name = 'paciente_form.html'
+	success_url = reverse_lazy('pacientes')
+
+
+#-------------------------Editar registros EN BBDD--------------------
+
+
+"""def sesion_edit(request, id_sesion):
 	sesion = SesionTerapeutica.objects.get(id=id_sesion)
 	if request.method == 'GET':
 		form = FormularioSesion(instance = sesion)
@@ -126,7 +159,14 @@ def sesion_edit(request, id_sesion):
 			form.save()
 		return redirect('sesiones')
 	d = dict(form= form)
-	return render(request, 'sesion_form.html', d)
+	return render(request, 'sesion_form.html', d)"""
+
+class SesionUpdate(UpdateView):
+	model = SesionTerapeutica
+	form_class = FormularioSesion
+	template_name = 'sesion_form.html'
+	success_url = reverse_lazy('sesiones')
+
 
 def paciente_edit(request, id_paciente):
 	paciente = Paciente.objects.get(id=id_paciente)
@@ -140,13 +180,21 @@ def paciente_edit(request, id_paciente):
 	d = dict(form= form)
 	return render(request, 'paciente_form.html', d)
 
-def sesion_delete(request, id_sesion):
+
+#-------------------------Borrar registros EN BBDD--------------------
+
+"""def sesion_delete(request, id_sesion):
 	sesion = SesionTerapeutica.objects.get(id=id_sesion)
 	if request.method == 'POST':
 		sesion.delete()
 		return redirect('sesiones')
 	d = dict(sesion=sesion)
-	return render(request, 'sesion_delete.html', d)
+	return render(request, 'sesion_delete.html', d)"""
+
+class SesionDelete(DeleteView):
+	model = SesionTerapeutica
+	template_name = 'sesion_delete.html'
+	success_url = reverse_lazy('sesiones')
 
 def paciente_delete(request, id_paciente):
 	paciente = Paciente.objects.get(id=id_paciente)
@@ -157,3 +205,17 @@ def paciente_delete(request, id_paciente):
 	return render(request, 'paciente_delete.html', d)
 
 
+#---------------------REGISTRO DE USUARIOS--------------------------
+
+def registro(request):
+	form = FormularioRegsitro()
+	d = dict(form = form)
+	return render(request, 'formulario_registro.html', d)
+
+
+"""def login(request):
+	email = request.POST.get('username','')
+	password = request.POST.get('password','')
+	form = FormularioLogin(request.POST.get('email'), request.POST.get('password',''))
+	d = dict(form=form)
+	return render(request, 'formulario_login.html', d)"""

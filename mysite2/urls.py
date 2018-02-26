@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^biblioteca/', include('biblioteca.urls')),
     url(r'^psicologia/', include('psicologia.urls')),
+    url(r'^usuarios/', include('usuarios.urls')),
 ]
