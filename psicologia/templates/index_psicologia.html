@@ -40,8 +40,10 @@
 		</div>
 	</nav>	
 {% else %}
-	<li class="nav-item active"><a href="login/" title="">Login  <span class="sr-only">(current)</span></a></li>
-	<li class="nav-item"><a href="#" title="">Registrate</a></li>
+	<div class="jumbotron">
+		<h1>Bienvenido al sitio de administracion psicologica</h1>
+		<a class="btn btn-outline-primary" href="login/">Login  <span class="sr-only">(current)</span></a>
+	</div>
 {% endif %}
 <div class="container">
 {% block content %}					

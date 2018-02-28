@@ -128,3 +128,12 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'psicologia'), )
 #MEDIA_URL = 'http://localhost:8000/media/'
 
 LOGIN_REDIRECT_URL = reverse_lazy('main')
+LOGOUT_REDIRECT_URL = reverse_lazy('main')
+
+#SETEAMOS TODO PARA PODER MANDAR EMAIL
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587 #si no anda probar el port 587 o 25 FUNCIONO CON EL 587
+EMAIL_HOST_USER = 'hernangaston@gmail.com'
+EMAIL_HOST_PASSWORD = 'helena031117'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

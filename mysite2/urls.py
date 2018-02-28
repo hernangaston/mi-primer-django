@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth.views import login
+
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -22,4 +24,5 @@ urlpatterns = [
     url(r'^biblioteca/', include('biblioteca.urls')),
     url(r'^psicologia/', include('psicologia.urls')),
     url(r'^usuarios/', include('usuarios.urls')),
+    url(r'^accounts/login/$', login, {'template_name': 'formulario_login.html'}, name='login'),
 ]
