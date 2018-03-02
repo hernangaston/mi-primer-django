@@ -1,10 +1,15 @@
+# Create your views here.
+
 from django.shortcuts import render
 
-# Create your views here.
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 #from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
+
+from django.core import serializers
+
+from django.contrib.auth.models import User
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -37,6 +42,7 @@ def main(request):
 #---misma vista que la de arriba pero basa en clases estoy usando esta
 class SesionList(ListView):
 	model = SesionTerapeutica
+	queryset = SesionTerapeutica.objects.all()
 	template_name = "sesiones.html"
 
 
@@ -103,6 +109,7 @@ def pacientes(request):
 class PacientesList(ListView):
 	model = Paciente
 	template_name = "pacientes.html"
+	paginate_by = 5
 
 #----------------CREAR REGISTROS EN BBDD--------------------------------
 
@@ -207,10 +214,10 @@ def paciente_delete(request, id_paciente):
 
 #---------------------REGISTRO DE USUARIOS--------------------------
 
-def registro(request):
+"""def registro(request):
 	form = FormularioRegsitro()
 	d = dict(form = form)
-	return render(request, 'formulario_registro.html', d)
+	return render(request, 'formulario_registro.html', d)"""
 
 
 """def login(request):
@@ -219,3 +226,11 @@ def registro(request):
 	form = FormularioLogin(request.POST.get('email'), request.POST.get('password',''))
 	d = dict(form=form)
 	return render(request, 'formulario_login.html', d)"""
+
+
+#------------------------SERIALIZAR OBJETOS PARA UN HACER SERVICIO WEB PARA CONSUMIR--------------------------------------
+
+def listadoUsuarios(request):
+	listado = serializers.serialize('json', User.objects.all(), fields=['username', 'email', 'first_name', 'last_name'])
+	return HttpResponse(listado, content_type = 'application/json')
+

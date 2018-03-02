@@ -1,7 +1,9 @@
+# Create your models here.
+
+
 from django.db import models
 
-# Create your models here.
-class SesionTerapeutica(models.Model): 
+class SesionTerapeutica(models.Model):
 	paciente = models.ForeignKey('Paciente', on_delete=models.PROTECT)
 	discurso = models.TextField()
 	fecha_sesion = models.DateField()

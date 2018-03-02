@@ -2,8 +2,8 @@ from django.conf.urls import url
 
 from django.urls import path
 
-from psicologia.views import main, SesionesFacturadas, SesionesPendientes, PacientesList, autorizaciones, registro, \
-    PacienteCreate, SesionUpdate, paciente_edit, SesionDelete, paciente_delete, SesionList, SesionCreate
+from psicologia.views import main, SesionesFacturadas, SesionesPendientes, PacientesList, autorizaciones, \
+    PacienteCreate, SesionUpdate, paciente_edit, SesionDelete, paciente_delete, SesionList, SesionCreate, listadoUsuarios
 
 #decorador de urls para ocultarlas a usuarios no logueados
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^sesiones/eliminarsesion/(?P<pk>\d+)/$', login_required(SesionDelete.as_view()), name='sesion_eliminar'),
     url(r'^facturadas/$', login_required(SesionesFacturadas.as_view()), name='sesiones_facturadas'),
     url(r'^pendientes/$', login_required(SesionesPendientes.as_view()), name='sesiones_pendientes'),    
-    url(r'^pacientes/$', login_required(PacientesList.as_view()), name='pacientes'),
+    url(r'^pacientes', login_required(PacientesList.as_view()), name='pacientes'),
     url(r'^nuevopaciente/$', login_required(PacienteCreate.as_view()), name='nuevo_paciente'),
     url(r'^pacientes/editarpaciente/(?P<id_paciente>\d+)/$', paciente_edit, name='paciente_editar'),
     url(r'^pacientes/eliminarpaciente/(?P<id_paciente>\d+)/$', paciente_delete, name='paciente_eliminar'),
@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^reset/password_reset_done/$', password_reset_done, {'template_name': 'registracion/password_reset_done.html'}, name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm, {'template_name': 'registracion/password_reset_confirm.html'}, name='password_reset_confirm'),
     url(r'^reset/done', password_reset_complete, {'template_name': 'registracion/password_reset_complete.html'}, name='password_reset_complete'),
-    url(r'^registro/$', registro, {'template_name': 'formulario_registro.html'}, name='registro'),
+    url(r'^listado', listadoUsuarios, name = 'listadoUsuarios')
 ]

@@ -46,8 +46,33 @@
 	</div>
 {% endif %}
 <div class="container">
-{% block content %}					
+	<p>{{ user }}</p>
+	<p>{{ user.id }}</p>
+	<p>{{ user.username }}</p>
+	<p>{{ user.nombre }}</p>
+	<p>{{ user.apellido }}</p>
+
+{% block content %}
+
 {% endblock %}
+<div>
+ 	<ul class="pagination pagination-lg">
+
+		<li class="page-item active">
+			{% if page_obj.has_previous %}
+			<a class="page-link" href="?page{{ page_obj.previous_page_number }}">Previous</a>
+			{% endif %}
+		</li>
+		
+		<li class="page-item active">
+			{% if page_obj.has_next %}
+			<a class="page-link" href="?page{{ page_obj.next_page_number }}">Next</a>
+			{% endif %}
+		</li>
+
+	</ul>
+</div>
+
 </div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

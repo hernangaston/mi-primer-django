@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'biblioteca',
     'psicologia',
     'usuarios',
@@ -130,7 +131,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'psicologia'), )
 LOGIN_REDIRECT_URL = reverse_lazy('main')
 LOGOUT_REDIRECT_URL = reverse_lazy('main')
 
-#SETEAMOS TODO PARA PODER MANDAR EMAIL
+#SETEAMOS TODO PARA PODER MANDAR EMAIL CON URL PARA RESETEAR  PASSWORD
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587 #si no anda probar el port 587 o 25 FUNCIONO CON EL 587

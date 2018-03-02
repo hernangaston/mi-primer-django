@@ -2,7 +2,7 @@ from django import forms
 
 from .models import SesionTerapeutica, Paciente
 
-class FormularioLogin(forms.Form):
+"""class FormularioLogin(forms.Form):
 	email = forms.EmailField(required=True, label="Ingresa tu correo electronico")
 	password = forms.CharField(widget=forms.PasswordInput, required=True)
 	
@@ -24,7 +24,7 @@ class FormularioRegsitro(forms.Form):
 		password_confirmation = self.cleaned_data['password_confirmation']
 		if password != password_confirmation:
 			raise forms.ValidationError("Los passwords no coinciden!!")
-		return "%s %s %s" % (email, password, password_confirmation)
+		return "%s %s %s" % (email, password, password_confirmation)"""
 
 
 
