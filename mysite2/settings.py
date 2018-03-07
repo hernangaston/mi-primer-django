@@ -128,8 +128,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'psicologia'), )
 #MEDIA_ROOT = 'static/'
 #MEDIA_URL = 'http://localhost:8000/media/'
 
-LOGIN_REDIRECT_URL = reverse_lazy('main')
-LOGOUT_REDIRECT_URL = reverse_lazy('main')
+LOGIN_REDIRECT_URL = reverse_lazy('main')#que me mande a pringipal si estoy logueado 
+LOGOUT_REDIRECT_URL = reverse_lazy('main')#que me mande a login
 
 #SETEAMOS TODO PARA PODER MANDAR EMAIL CON URL PARA RESETEAR  PASSWORD
 EMAIL_USE_TLS = True

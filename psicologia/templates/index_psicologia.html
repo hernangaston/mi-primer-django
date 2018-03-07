@@ -13,7 +13,7 @@
 {% if user.is_authenticated %}
 	<nav  class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="collapse navbar-collapse" id="navbarColor03">
-			<a class="navbar-brand" href="#"><h1>Hola {{ user.username  }}!</h1></a>
+			<a class="navbar-brand" href="#"><h1>Hola profesional {{ user.username  }}!</h1></a>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
 					<a class="nav-link" href="logout/" >Logout <span class="sr-only">(current)</span></a>
@@ -36,6 +36,12 @@
 
 
 				<li  class="nav-item"><a class="nav-link" href="autorizaciones/" >Autorizaciones</a></li>
+				<li  class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Obras Sociales</a>
+					<div class="dropdown-menu" x-placement="bottom-start" style="">
+						<a class="dropdown-item" href="obrassociales/" >Listado obras sociales</a>
+						<a class="dropdown-item" href="obrassociales/crear/" >Ingresar obra social</a>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</nav>	
@@ -46,12 +52,6 @@
 	</div>
 {% endif %}
 <div class="container">
-	<p>{{ user }}</p>
-	<p>{{ user.id }}</p>
-	<p>{{ user.username }}</p>
-	<p>{{ user.nombre }}</p>
-	<p>{{ user.apellido }}</p>
-
 {% block content %}
 
 {% endblock %}

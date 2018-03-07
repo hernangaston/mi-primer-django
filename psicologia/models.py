@@ -2,13 +2,27 @@
 
 
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+
+class Profesional(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	matricula = models.CharField(max_length=50)
+
+	class Meta:
+		ordering = ["matricula"]
+		verbose_name_plural = "Profesionales"
+	
+	def __str__(self):
+		return self.matricula 
 
 class SesionTerapeutica(models.Model):
-	paciente = models.ForeignKey('Paciente', on_delete=models.PROTECT)
-	discurso = models.TextField()
+	profesional = models.ForeignKey('Profesional', on_delete=models.CASCADE)
+	paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE)
+	datos= models.TextField()
 	fecha_sesion = models.DateField()
 	facturada = models.BooleanField()
-	numero_sesion = models.TextField()
+	numero_sesion = models.IntegerField()
 	
 
 	class Meta:
@@ -18,18 +32,18 @@ class SesionTerapeutica(models.Model):
 	def __str__(self):
 		return "%s %s" % (self.paciente.apellido, self.paciente.nombre) 
 
-
 class Paciente(models.Model):
+	profesional = models.ForeignKey('Profesional', on_delete=models.PROTECT)
 	nombre = models.CharField(max_length=50)
 	apellido = models.CharField(max_length=50)
 	obra_social = models.ForeignKey('ObraSocial', on_delete=models.PROTECT)
 	edad = models.IntegerField()
 	telefono = models.IntegerField()
 	dni = models.IntegerField()
-	historia = models.ForeignKey('Historia', on_delete=models.PROTECT)
-	medicacion = models.TextField()
+	historia = models.TextField()
+	medicacion = models.CharField(max_length=70)
 	diagnostico = models.TextField()
-	inicio_tratamiento = models.DateField()
+	inicio_tratamiento = models.DateTimeField(default=timezone.now)
 
 	class Meta:
 		ordering = ["apellido"]
@@ -45,32 +59,15 @@ class ObraSocial(models.Model):
 		ordering = ["nombre"]
 		verbose_name_plural = "Obras Sociales"
 
-
-
 	def __str__(self):
-		return '{}'.format(self.nombre)
-
-class Historia(models.Model):
-	historia_del_paciente = models.TextField()
-	anamnesis = models.ForeignKey('Anamnesis', on_delete=models.PROTECT)
-
-	def __str__(self):
-		return self.historia_del_paciente
-
-class Anamnesis(models.Model):
-	tratamientos = models.TextField()
-
-	class Meta:
-		verbose_name_plural = "Anamnesis"
-
-	def __str__(self):
-		return self.tratamientos
+		return self.nombre
 
 class Autorizacion(models.Model):
 	fecha_autorizacion = models.DateField()
 	presentada = models.BooleanField()
 	paciente = models.ForeignKey('Paciente', on_delete=models.PROTECT)
 	obra_social = models.ForeignKey('ObraSocial', on_delete=models.PROTECT)
+	profesional = models.ForeignKey('Profesional', on_delete=models.CASCADE)
 
 	class Meta:
 		ordering = ["fecha_autorizacion"]
@@ -78,4 +75,3 @@ class Autorizacion(models.Model):
 
 	def __str__(self):
 		return self.paciente.nombre
-

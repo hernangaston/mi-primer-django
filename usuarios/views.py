@@ -20,7 +20,7 @@ class RegistroUsuarios(CreateView):
 	success_url = reverse_lazy('sesiones')
 
 #-------------------------VISTA PARA DJANGO REST FRAMEWORK-----------------------------
-
+#---------------UNA VEZ HECHA LA VISTA MODIFICAMOS LA URL-------------------------
 class UserApi(APIView):
 	serializer = UserSerializer
 

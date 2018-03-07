@@ -44,7 +44,10 @@ class SesionList(ListView):
 	model = SesionTerapeutica
 	queryset = SesionTerapeutica.objects.all()
 	template_name = "sesiones.html"
+	paginate_by = 5
 
+
+#self.context['request'].user
 
 class SesionesPendientes(ListView):
 	model = SesionTerapeutica
@@ -80,8 +83,7 @@ def pendientes(request):
 #--------------VISTA DE LAS AUTORIZACIONES-------------------
 
 
-def autorizaciones(request):
-	
+def autorizaciones(request):	
 	sesion = SesionTerapeutica.objects.all()
 	paciente = Paciente.objects.all()
 	autorizacion = Autorizacion.objects.all()
@@ -108,6 +110,7 @@ def pacientes(request):
 #igual vista de oacientes creada con una clase
 class PacientesList(ListView):
 	model = Paciente
+	queryset = Paciente.objects.all()
 	template_name = "pacientes.html"
 	paginate_by = 5
 
@@ -126,13 +129,14 @@ def vistaSesion(request):
 	return  render(request, 'sesion_form.html', d)"""
 
 
-#Vista que renderiza el formulario para crear la sesion hecha como clase (hace lo mismo que la de arriba)
+#--------------Vista que renderiza el formulario para crear la sesion hecha como clase (hace lo mismo que la de arriba)
+
 class SesionCreate(CreateView):
 	model = SesionTerapeutica
 	form_class = FormularioSesion
 	template_name = 'sesion_form.html'
 	success_url = reverse_lazy('sesiones')
-	
+
 
 """def vistaPaciente(request):
 	if request.method == 'POST':
@@ -175,7 +179,14 @@ class SesionUpdate(UpdateView):
 	success_url = reverse_lazy('sesiones')
 
 
-def paciente_edit(request, id_paciente):
+
+class PacienteUpdate(UpdateView):
+	model = Paciente
+	form_class = FormularioPaciente
+	template_name = 'paciente_form.html'
+	success_url = reverse_lazy('pacientes')
+
+"""def paciente_edit(request, id_paciente):
 	paciente = Paciente.objects.get(id=id_paciente)
 	if request.method == 'GET':
 		form = FormularioPaciente(instance = paciente)
@@ -185,7 +196,7 @@ def paciente_edit(request, id_paciente):
 			form.save()
 		return redirect('pacientes')
 	d = dict(form= form)
-	return render(request, 'paciente_form.html', d)
+	return render(request, 'paciente_form.html', d)"""
 
 
 #-------------------------Borrar registros EN BBDD--------------------
@@ -203,14 +214,44 @@ class SesionDelete(DeleteView):
 	template_name = 'sesion_delete.html'
 	success_url = reverse_lazy('sesiones')
 
-def paciente_delete(request, id_paciente):
+
+
+class PacienteDelete(DeleteView):
+	model = Paciente
+	template_name = 'paciente_delete.html'
+	success_url = reverse_lazy('pacientes')
+
+
+"""def paciente_delete(request, id_paciente):
 	paciente = Paciente.objects.get(id=id_paciente)
 	if request.method == 'POST':
 		paciente.delete()
 		return redirect('pacientes')
 	d = dict(paciente=paciente)
-	return render(request, 'paciente_delete.html', d)
+	return render(request, 'paciente_delete.html', d)"""
+#---------------------OBRAS SOCIALES ------------------------------
+class ObraSocialList(ListView):
+	model = ObraSocial
+	queryset = ObraSocial.objects.all()
+	template_name = "obrasSociales.html"
 
+
+class ObraSocialCreate(CreateView):
+	model = ObraSocial
+	fields = '__all__'
+	template_name = 'obrasocial_form.html'
+	success_url = reverse_lazy('obrassociales')
+
+class ObraSocialUpdate(UpdateView):
+	model = ObraSocial
+	form_class = FormularioObraSocial
+	template_name = 'obrasocial_form.html'
+	success_url = reverse_lazy('obrassociales')
+
+class ObraSocialDelete(DeleteView):
+	model = ObraSocial
+	template_name = 'obrasocial_delete.html'
+	success_url = reverse_lazy('obrassociales')	
 
 #---------------------REGISTRO DE USUARIOS--------------------------
 

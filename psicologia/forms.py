@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import SesionTerapeutica, Paciente
+from .models import SesionTerapeutica, Paciente, ObraSocial
 
 """class FormularioLogin(forms.Form):
 	email = forms.EmailField(required=True, label="Ingresa tu correo electronico")
@@ -32,10 +32,10 @@ class FormularioSesion(forms.ModelForm):
 
 	class Meta:		
 		model = SesionTerapeutica
-		
+		exclude = ('profesional',)
 		fields = [
 			'paciente',
-			'discurso',
+			'datos',
 			'fecha_sesion',
 			'facturada',
 			'numero_sesion',
@@ -43,7 +43,7 @@ class FormularioSesion(forms.ModelForm):
 
 		labels = {
 			'paciente': 'Paciente',
-			'discurso': 'Anotaciones de la sesion',
+			'datos': 'Anotaciones de la sesion',
 			'fecha_sesion': 'Fecha de la sesion',
 			'facturada': 'Sesion Facturada o Presentada',
 			'numero_sesion': 'Numero de seion'	
@@ -51,7 +51,7 @@ class FormularioSesion(forms.ModelForm):
 
 		widgets = {
 			'paciente': forms.Select(attrs={'class':'form-control'}),
-			'discurso': forms.TextInput(attrs={'class':'form-control'}),
+			'datos': forms.TextInput(attrs={'class':'form-control'}),
 			'fecha_sesion': forms.DateInput(attrs={'class':'form-control'}),
 			'facturada': forms.CheckboxInput(),
 			'numero_sesion': forms.TextInput(attrs={'class':'form-control'}),
@@ -61,7 +61,7 @@ class FormularioSesion(forms.ModelForm):
 class FormularioPaciente(forms.ModelForm):
 	class Meta:
 		model = Paciente
-
+		exclude = ('profesional',)
 		fields = [
 			'nombre',
 			'apellido',
@@ -72,7 +72,6 @@ class FormularioPaciente(forms.ModelForm):
 			'historia',
 			'medicacion',
 			'diagnostico',
-			'inicio_tratamiento',
 		]
 
 		labels = {
@@ -85,7 +84,6 @@ class FormularioPaciente(forms.ModelForm):
 			'historia': 'Historia Clinica',
 			'medicacion': 'Medicacion',
 			'diagnostico': 'Diagnostico',
-			'inicio_tratamiento': 'Fecha de inicio del tratamiento',
 		}
 
 		widgets = {
@@ -95,8 +93,24 @@ class FormularioPaciente(forms.ModelForm):
 			'edad': forms.TextInput(attrs={'class':'form-control'}),
 			'telefono': forms.TextInput(attrs={'class':'form-control'}),
 			'dni': forms.TextInput(attrs={'class':'form-control'}),
-			'historia': forms.Select(attrs={'class':'form-control'}),
+			'historia': forms.TextInput(attrs={'class':'form-control'}),
 			'medicacion': forms.TextInput(attrs={'class':'form-control'}),
 			'diagnostico': forms.TextInput(attrs={'class':'form-control'}),
-			'inicio_tratamiento': forms.DateInput(attrs={'class':'form-control'}),
+		}
+
+
+class FormularioObraSocial(forms.ModelForm):
+	class Meta:
+		model = ObraSocial
+		
+		fields = [
+			'nombre'
+		]
+
+		labels = {
+			'nombre': 'Nombre',
+		}
+
+		widgets = {
+			'nombre': forms.TextInput(attrs={'class':'form-control'}),
 		}

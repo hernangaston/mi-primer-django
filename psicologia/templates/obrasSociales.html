@@ -1,0 +1,20 @@
+{%  extends 'index_psicologia.html' %}
+{% block content %}
+	<h1>Obras Sociales</h1>
+	{% if object_list %}
+	{% for s in object_list %}
+		<div>
+			<h2>Listado total de obras sociales</h2>
+			<p>{{ s.nombre }}</p>
+			
+			<a class="btn btn-outline-info" href="editar/{{ s.id }}" title="">Editar</a>
+			<a class="btn btn-outline-primary" href="eliminar/{{ s.id }}" title="">Eliminar</a>					
+		</div>
+	{% endfor %}
+	{% else %}
+		<p>No hay obras sociales ingresadas</p>
+	{% endif %}
+	<br />
+	<br />
+	<a class="btn btn-outline-danger" href="http://localhost/psicologia/" title="">Volver</a>
+{% endblock %}
